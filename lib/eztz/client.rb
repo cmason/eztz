@@ -40,7 +40,7 @@ module Eztz
     #   => #<Hashie::Mash dstOffset=3600.0 rawOffset=36000.0 status="OK" timeZoneId="Australia/Sydney" timeZoneName="Australian Eastern Daylight Time">
     def self.timezone(params={})
       params[:location] = "#{params.delete(:lat)},#{params.delete(:lng)}" if params[:lat] && params[:lng]
-      raise ArgumentError, 'You must provide a location' if params[:location].nil? || params[:location].empty?
+      raise ArgumentError, 'You must provide a location' if params[:location].nil? || params[:location].empty? || params[:location] == ','
       params[:sensor] ||= false
       params[:timestamp] ||= Time.now.to_i
       Hashie::Mash.new self.get('/maps/api/timezone/json', query: params)
