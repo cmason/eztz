@@ -19,6 +19,7 @@ describe Eztz do
     context "with invalid parameters" do
       it "should raise an argument error" do
         expect { Eztz.timezone }.to raise_error ArgumentError
+        expect { Eztz.timezone lat: '', lng: ''}.to raise_error ArgumentError
       end
     end
 
