@@ -2,6 +2,8 @@
 
 Ruby wrapper for the [Google Time Zone API](https://developers.google.com/maps/documentation/timezone)
 
+[![Code Climate](https://codeclimate.com/github/cmason/eztz.png)](https://codeclimate.com/github/cmason/eztz)
+
 ## Installation
 
 Add this line to your application's Gemfile:
