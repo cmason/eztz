@@ -3,6 +3,7 @@
 Ruby wrapper for the [Google Time Zone API](https://developers.google.com/maps/documentation/timezone)
 
 [![Code Climate](https://codeclimate.com/github/cmason/eztz.png)](https://codeclimate.com/github/cmason/eztz)
+[![Build Status](https://travis-ci.org/cmason/eztz.png?branch=master)](https://travis-ci.org/cmason/eztz)
 
 ## Installation
 
