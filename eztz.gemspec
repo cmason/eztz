@@ -20,6 +20,6 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency 'vcr', '~> 2.4.0'
   gem.add_development_dependency 'webmock', '~> 1.9.3'
 
-  gem.add_dependency 'httparty', '~> 0.10.0'
+  gem.add_dependency 'httparty', '~> 0.10'
   gem.add_dependency 'hashie', '>= 1.2.0'
 end
