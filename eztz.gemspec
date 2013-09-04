@@ -6,6 +6,7 @@ Gem::Specification.new do |gem|
   gem.authors       = ["Chris Mason"]
   gem.email         = ["chris@chaione.com"]
   gem.description   = %q{Ruby wrapper for the Google Time Zone API}
+  gem.license       = 'MIT'
   gem.summary       = gem.description
   gem.homepage      = "https://github.com/cmason/eztz"
 
