@@ -1,11 +1,8 @@
+sudo: false
 language: ruby
 rvm:
-  - "1.9.3"
-  - "2.0.0"
-  - "2.1.0"
-  - jruby-19mode # JRuby in 1.9 mode
-# uncomment this line if your project needs to run something other than `rake`:
-script: bundle exec rspec spec
-addons:
-  code_climate:
-    repo_token: f5c2c3fabe98fda88ab59c676017fcf739ac68a04698208afac4a924177b192d 
+  - 2.4
+  - 2.3
+  - 2.2
+  - 2.1
+before_install: gem install bundler -v 1.14.5

@@ -1,0 +1,21 @@
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=UTF-8
+Date: Mon, 06 Mar 2017 19:49:05 GMT
+Expires: Tue, 07 Mar 2017 19:49:05 GMT
+Cache-Control: public, max-age=86400
+Access-Control-Allow-Origin: *
+Server: mafe
+X-XSS-Protection: 1; mode=block
+X-Frame-Options: SAMEORIGIN
+Alt-Svc: quic=":443"; ma=2592000; v="36,35,34"
+Accept-Ranges: none
+Vary: Accept-Encoding
+Transfer-Encoding: chunked
+
+{
+   "dstOffset" : 0,
+   "rawOffset" : -21600,
+   "status" : "OK",
+   "timeZoneId" : "America/Chicago",
+   "timeZoneName" : "Central Standard Time"
+}

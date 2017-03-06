@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Eztz
-  VERSION = "0.0.4"
+  VERSION = '1.0.0'.freeze
 end
