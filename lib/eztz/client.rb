@@ -1,49 +1,55 @@
-require 'httparty'
-require 'hashie'
+# frozen_string_literal: true
+require 'net/http'
+require 'json'
 
 module Eztz
+  # The Google Time Zone API client.
+  # If you need to make requests with multiple api keys, then you'll probably
+  # want to use this class directly.  Otherwise, it will be easier to use
+  # {::Eztz#timezone Eztz.timezone}
   class Client
-    include HTTParty
-    base_uri 'https://maps.googleapis.com'
+    attr_reader :api_key
+
+    def initialize(api_key: Eztz.api_key)
+      @api_key = api_key
+      @uri = URI('https://maps.googleapis.com/maps/api/timezone/json')
+    end
 
     # Gets timezone information for a location on earth,
     # as well as that location's time offset from UTC.
     #
-    # @param [Hash] params options to get timezone information.
-    #   Must include :location or :lat & :lng
-    # @option params [String] :location a comma-separated lat,lng tuple. (eg. "-33.86,151.20")
-    # @option params [String, Float] :lat latitude (eg. -33.86)
-    # @option params [String, Float] :lng longitude (ex. 151.20)
-    # @option params [Boolean] :sensor specifies whether the application requesting data is using a sensor. Defaults to _false_
-    # @option params [Integer] :timestamp specifies the desired time as seconds since midnight, January 1, 1970 UTC. Defaults to _now_
-    # @option params [String] :language the language in which to return results. Defaults to _en_.
-    # @raise [ArgumentError] if :location or :lat and :lng are not provided
-    # @return [Hashie::Mash] the resulting timezone data. Response has the following properties:
-    #   * *dstOffset* : the offset for daylight-savings time in seconds.
-    #     This will be zero if the time zone is not in Daylight Savings Time during the specified timestamp.
-    #   * *rawOffset* : the offset from UTC (in seconds) for the given location.
-    #     This does not take into effect daylight savings.
-    #   * *timeZoneId* : a string containing the ID of the time zone, such as "America/Los_Angeles" or "Australia/Sydney".
-    #   * *timeZoneName* : a string containing the long form name of the time zone.
-    #     This field will be localized if the language parameter is set.
-    #     eg. "Pacific Daylight Time" or "Australian Eastern Daylight Time"
-    #   * *status* : a string indicating the status of the response. Status will be one of the following:
-    #     * *OK* - indicates that the request was successful.
-    #     * *INVALID_REQUEST* - indicates that the request was malformed.
-    #     * *OVER_QUERY_LIMIT* - indicates the requestor has exceeded quota.
-    #     * *REQUEST_DENIED* - indicates that the the API did not complete the request. Confirm that the request was sent over http instead of https.
-    #     * *UNKNOWN_ERROR* - indicates an unknown error.
-    #     * *ZERO_RESULTS* - indicates that no time zone data could be found for the specified position or time.
-    #       Confirm that the request is for a location on land, and not over water.
-    # @example Get timezone data
-    #   Eztz::Client.timezone(location: "-33.86,151.20")
-    #   => #<Hashie::Mash dstOffset=3600.0 rawOffset=36000.0 status="OK" timeZoneId="Australia/Sydney" timeZoneName="Australian Eastern Daylight Time">
-    def self.timezone(params={})
-      params[:location] = "#{params.delete(:lat)},#{params.delete(:lng)}" if params[:lat] && params[:lng]
-      raise ArgumentError, 'You must provide a location' if params[:location].nil? || params[:location].empty? || params[:location] == ','
-      params[:sensor] ||= false
-      params[:timestamp] ||= Time.now.to_i
-      Hashie::Mash.new self.get('/maps/api/timezone/json', query: params)
+    # @param location [String, Array] a comma-separated lat,lng tuple
+    #   (eg. "-33.86,151.20"), representing the location to look up. Can also be
+    #   an array (eg. [-33.86, 151.20]).
+    # @param timestamp [Integer] specifies the desired time as seconds
+    #   since midnight, January 1, 1970 UTC. The Google Maps Time Zone API uses
+    #   the timestamp to determine whether or not Daylight Savings should be
+    #   applied. Times before 1970 can be expressed as negative values.
+    #   Defaults to the current time.
+    # @param language [String] The language in which to return results
+    #   Defaults to 'en'. A list of supported languages can be found at
+    #   https://developers.google.com/maps/faq#languagesupport
+    # @raise [ArgumentError] if location is not provided
+    # @raise [ApiError] if the API returns an error response.
+    # @return [Eztz::TimeZoneResponse] the resulting timezone data.
+    def timezone(location:, timestamp: Time.now.utc.to_i, language: 'en')
+      uri.query = query_params(location, timestamp, language)
+      res = Net::HTTP.get_response(uri)
+      raise ApiError, res.body unless res.is_a?(Net::HTTPSuccess)
+      TimeZoneResponse.new(timestamp, JSON.parse(res.body))
+    end
+
+    private
+
+    attr_reader :uri
+
+    def query_params(location, timestamp, language)
+      URI.encode_www_form(
+        location: (location.respond_to?(:join) ? location.join(',') : location),
+        timestamp: timestamp,
+        language: language,
+        key: api_key
+      )
     end
   end
 end

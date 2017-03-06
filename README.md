@@ -10,7 +10,9 @@ Ruby wrapper for the [Google Time Zone API](https://developers.google.com/maps/d
 
 Add this line to your application's Gemfile:
 
-    gem 'eztz'
+```ruby
+ gem 'eztz'
+```
 
 And then execute:
 
@@ -22,33 +24,36 @@ Or install it yourself as:
 
 ## Usage
 
-    $ Eztz.timezone(lat: -33.86, lng: 151.20)
+    $ Eztz.timezone(location: '29.65,-95.28')
 
-    => #<Hashie::Mash dstOffset=3600.0 rawOffset=36000.0 status="OK" timeZoneId="Australia/Sydney" timeZoneName="Australian Eastern Daylight Time">
+    => #<Eztz::TimeZoneResponse:0x007fe71ba2df78 @timestamp=1488834591, @dst_offset=0, @error_message=nil, @raw_offset=-21600, @status="OK", @id="America/Chicago", @name="Central Standard Time">
 
 or
 
-    $ Eztz.timezone(location: '-33.86,151.20')
+    $ Eztz.timezone(location: [29.65, -95.28])
 
-    => #<Hashie::Mash dstOffset=3600.0 rawOffset=36000.0 status="OK" timeZoneId="Australia/Sydney" timeZoneName="Australian Eastern Daylight Time">
+    => #<Eztz::TimeZoneResponse:0x007fe71ba2df78 @timestamp=1488834591, @dst_offset=0, @error_message=nil, @raw_offset=-21600, @status="OK", @id="America/Chicago", @name="Central Standard Time">
 
-Params should take one of the following forms:
+Optional parameters include:
 
-    { location: "-33.86,151.20" }
-    { lat: -33.86, lng: 151.20 }
+  * `timestamp:` specifies the desired time as seconds since midnight, January 1, 1970 UTC. The Google Maps Time Zone API uses the timestamp to determine whether or not Daylight Savings should be applied. Times before 1970 can be expressed as negative values. Defaults to the current time.
+  * `language:` The language in which to return results Defaults to 'en'. A list of supported languages can be found at developers.google.com/maps/faq#languagesupport
 
-## Calculating the Local Time
+## Development
 
-The local time of a given location is the sum of the `Time.now.to_i` , and the `dstOffset` and `rawOffset` fields from the result.
+After checking out the repo, run `bin/setup` to install dependencies.
+Then, run `rake test` to run the tests. You can also run `bin/console`
+for an interactive prompt that will allow you to experiment.
+
+To install this gem onto your local machine, run `bundle exec rake install`.
+To release a new version, update the version number in `version.rb`,
+and then run `bundle exec rake release`, which will create a git tag for the version,
+push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
 
 ## Contributing
 
-1. Fork it
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Added some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create new Pull Request
+Bug reports and pull requests are welcome on GitHub at https://github.com/cmason/eztz. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
 ## License
 
-This code is provided under the MIT license.  See [LICENSE](LICENSE) for more details.
+The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
