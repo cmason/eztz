@@ -37,7 +37,7 @@ class ResponseTest < Minitest::Test
     assert_equal res.status, "ZERO_RESULTS"
   end
 
-  def test_it_can_be_coerced_to_a_has
+  def test_it_can_be_coerced_to_a_hash
     res = Eztz::TimeZoneResponse.new(@timestamp, successful_response)
     assert_kind_of Hash, res.to_h
   end
