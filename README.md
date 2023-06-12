@@ -2,6 +2,7 @@
 
 Ruby wrapper for the [Google Time Zone API](https://developers.google.com/maps/documentation/timezone)
 
+[![Tests](https://github.com/cmason/eztz/actions/workflows/test.yml/badge.svg)](https://github.com/cmason/eztz/actions/workflows/test.yml)
 [![Code Climate](https://codeclimate.com/github/cmason/eztz.png)](https://codeclimate.com/github/cmason/eztz)
 [![Build Status](https://travis-ci.org/cmason/eztz.png?branch=master)](https://travis-ci.org/cmason/eztz)
 [![Gem Version](https://badge.fury.io/rb/eztz.png)](http://badge.fury.io/rb/eztz)
