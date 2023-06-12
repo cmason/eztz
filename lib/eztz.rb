@@ -1,8 +1,9 @@
 # frozen_string_literal: true
-require 'eztz/client'
-require 'eztz/errors'
-require 'eztz/response'
-require 'eztz/version'
+
+require "eztz/client"
+require "eztz/errors"
+require "eztz/response"
+require "eztz/version"
 
 # Ruby wrapper for the Google Time Zone API.
 # @example Sample usage
@@ -58,10 +59,10 @@ module Eztz
     #     @dst_offset=3600, @error_message=nil, @raw_offset=36000,
     #     @status="OK", @id="Australia/Sydney",
     #     @name="Australian Eastern Daylight Time">
-    def timezone(location:, timestamp: Time.now.utc.to_i, language: 'en')
+    def timezone(location:, timestamp: Time.now.utc.to_i, language: "en")
       client.timezone(location: location,
-                      timestamp: timestamp,
-                      language: language)
+        timestamp: timestamp,
+        language: language)
     end
   end
 end
