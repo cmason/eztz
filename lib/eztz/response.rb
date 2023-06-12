@@ -36,7 +36,7 @@ module Eztz
     # @!attribute timestamp [r]
     #   @return [Integer] The timestamp used in the request.
     attr_reader :dst_offset, :error_message, :id, :name,
-                :raw_offset, :status, :timestamp
+      :raw_offset, :status, :timestamp
 
     # @param timestamp [Integer] The timestamp used in the request
     # @param response [Hash] The parsed JSON response from the api call
@@ -44,13 +44,13 @@ module Eztz
       @timestamp = timestamp
       @dst_offset, @error_message, @raw_offset, @status, @id, @name =
         response.values_at(
-          'dstOffset', 'error_message', 'rawOffset', 'status', 'timeZoneId',
-          'timeZoneName'
+          "dstOffset", "error_message", "rawOffset", "status", "timeZoneId",
+          "timeZoneName"
         )
     end
 
     def success?
-      status == 'OK'
+      status == "OK"
     end
 
     # The local time of the location is the sum of the :timestamp,
@@ -64,13 +64,13 @@ module Eztz
     # @return [Hash]
     def to_h
       {
-        dst_offset:    dst_offset,
+        dst_offset: dst_offset,
         error_message: error_message,
-        id:            id,
-        name:          name,
-        raw_offset:    raw_offset,
-        status:        status,
-        timestamp:     timestamp
+        id: id,
+        name: name,
+        raw_offset: raw_offset,
+        status: status,
+        timestamp: timestamp
       }
     end
   end

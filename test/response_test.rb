@@ -1,5 +1,6 @@
 # frozen_string_literal: true
-require 'test_helper'
+
+require "test_helper"
 
 class ResponseTest < Minitest::Test
   def setup
@@ -25,15 +26,15 @@ class ResponseTest < Minitest::Test
     assert res.success?
     assert_equal res.dst_offset, 3_600
     assert_equal res.raw_offset, 36_000
-    assert_equal res.status, 'OK'
-    assert_equal res.id, 'Australia/Sydney'
-    assert_equal res.name, 'Australian Eastern Daylight Time'
+    assert_equal res.status, "OK"
+    assert_equal res.id, "Australia/Sydney"
+    assert_equal res.name, "Australian Eastern Daylight Time"
   end
 
   def test_invalid_response
     res = Eztz::TimeZoneResponse.new(@timestamp, invalid_response)
     refute res.success?
-    assert_equal res.status, 'ZERO_RESULTS'
+    assert_equal res.status, "ZERO_RESULTS"
   end
 
   def test_it_can_be_coerced_to_a_has

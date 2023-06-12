@@ -1,6 +1,7 @@
 # frozen_string_literal: true
-require 'net/http'
-require 'json'
+
+require "net/http"
+require "json"
 
 module Eztz
   # The Google Time Zone API client.
@@ -12,7 +13,7 @@ module Eztz
 
     def initialize(api_key: Eztz.api_key)
       @api_key = api_key
-      @uri = URI('https://maps.googleapis.com/maps/api/timezone/json')
+      @uri = URI("https://maps.googleapis.com/maps/api/timezone/json")
     end
 
     # Gets timezone information for a location on earth,
@@ -32,7 +33,7 @@ module Eztz
     # @raise [ArgumentError] if location is not provided
     # @raise [ApiError] if the API returns an error response.
     # @return [Eztz::TimeZoneResponse] the resulting timezone data.
-    def timezone(location:, timestamp: Time.now.utc.to_i, language: 'en')
+    def timezone(location:, timestamp: Time.now.utc.to_i, language: "en")
       uri.query = query_params(location, timestamp, language)
       res = Net::HTTP.get_response(uri)
       raise ApiError, res.body unless res.is_a?(Net::HTTPSuccess)
@@ -45,7 +46,7 @@ module Eztz
 
     def query_params(location, timestamp, language)
       URI.encode_www_form(
-        location: (location.respond_to?(:join) ? location.join(',') : location),
+        location: (location.respond_to?(:join) ? location.join(",") : location),
         timestamp: timestamp,
         language: language,
         key: api_key
