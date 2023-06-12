@@ -3,7 +3,7 @@
 [![Tests](https://github.com/cmason/eztz/actions/workflows/test.yml/badge.svg)](https://github.com/cmason/eztz/actions/workflows/test.yml)
 [![Maintainability](https://api.codeclimate.com/v1/badges/0ffbd44773bb2ee6f9ed/maintainability)](https://codeclimate.com/github/cmason/eztz/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/0ffbd44773bb2ee6f9ed/test_coverage)](https://codeclimate.com/github/cmason/eztz/test_coverage)
-[![Gem Version](https://badge.fury.io/rb/eztz.png)](http://badge.fury.io/rb/eztz)
+[![Gem Version](https://badge.fury.io/rb/eztz.svg)](https://badge.fury.io/rb/eztz)
 
 Ruby wrapper for the [Google Time Zone API](https://developers.google.com/maps/documentation/timezone)
 
