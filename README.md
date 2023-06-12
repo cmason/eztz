@@ -1,13 +1,17 @@
 # Eztz
 
+[![Tests](https://github.com/cmason/eztz/actions/workflows/test.yml/badge.svg)](https://github.com/cmason/eztz/actions/workflows/test.yml)
+[![Maintainability](https://api.codeclimate.com/v1/badges/0ffbd44773bb2ee6f9ed/maintainability)](https://codeclimate.com/github/cmason/eztz/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/0ffbd44773bb2ee6f9ed/test_coverage)](https://codeclimate.com/github/cmason/eztz/test_coverage)
+[![Gem Version](https://badge.fury.io/rb/eztz.png)](http://badge.fury.io/rb/eztz)
+
 Ruby wrapper for the [Google Time Zone API](https://developers.google.com/maps/documentation/timezone)
 
-[![Tests](https://github.com/cmason/eztz/actions/workflows/test.yml/badge.svg)](https://github.com/cmason/eztz/actions/workflows/test.yml)
-[![Code Climate](https://codeclimate.com/github/cmason/eztz.png)](https://codeclimate.com/github/cmason/eztz)
-[![Build Status](https://travis-ci.org/cmason/eztz.png?branch=master)](https://travis-ci.org/cmason/eztz)
-[![Gem Version](https://badge.fury.io/rb/eztz.png)](http://badge.fury.io/rb/eztz)
-[![Coverage Status](https://coveralls.io/repos/github/cmason/eztz/badge.svg?branch=remove-dependencies)](https://coveralls.io/github/cmason/eztz?branch=remove-dependencies)
+## Requirements
 
+- Ruby >= 2.7
+
+Other versions of Ruby may work, but the gem is tested against the above versions.
 ## Installation
 
 Add this line to your application's Gemfile:
@@ -26,12 +30,20 @@ Or install it yourself as:
 
 ## Usage
 
+An API key is required to access the Google Time Zone API. You can create a new
+API key from the [Google Cloud Console](https://developers.google.com/maps/documentation/timezone/get-api-key).
+
+    # Set your API key
+    Eztz.api_key = 'YOUR_API_KEY'
+
+    # Pass location coordinates as a string
     $ Eztz.timezone(location: '29.65,-95.28')
 
     => #<Eztz::TimeZoneResponse:0x007fe71ba2df78 @timestamp=1488834591, @dst_offset=0, @error_message=nil, @raw_offset=-21600, @status="OK", @id="America/Chicago", @name="Central Standard Time">
 
 or
 
+    # Pass location coordinates as an array
     $ Eztz.timezone(location: [29.65, -95.28])
 
     => #<Eztz::TimeZoneResponse:0x007fe71ba2df78 @timestamp=1488834591, @dst_offset=0, @error_message=nil, @raw_offset=-21600, @status="OK", @id="America/Chicago", @name="Central Standard Time">
