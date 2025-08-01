@@ -6,6 +6,11 @@ on:
       - main
   pull_request:
 
+permissions:
+  actions: write
+  contents: read
+  id-token: write
+
 jobs:
   test:
     runs-on: ubuntu-latest
