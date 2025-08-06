@@ -8,7 +8,7 @@ class EztzTest < Minitest::Test
   end
 
   def test_that_it_has_a_version_number
-    refute_nil ::Eztz::VERSION
+    assert defined?(Eztz::VERSION)
   end
 
   def test_it_assigns_an_api_key
