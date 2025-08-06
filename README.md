@@ -11,7 +11,14 @@ Ruby wrapper for the [Google Time Zone API](https://developers.google.com/maps/d
 
 - Ruby >= 2.7
 
-Other versions of Ruby may work, but the gem is tested against the above versions.
+Other versions of Ruby may work, but the gem is tested against the following versions:
+
+- "2.7"
+- "3.0"
+- "3.1"
+- "3.2"
+- "3.3"
+- "3.4"
 
 ## Installation
 
